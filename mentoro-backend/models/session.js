@@ -21,6 +21,10 @@ const SessionSchema = new Schema({
         type: Schema.Types.ObjectId, 
         ref: 'User' 
     },
+    public:{
+        type: Boolean,
+        default: true
+    },
     requests: [{
         type: Schema.Types.ObjectId, 
         ref: 'SessionRequest'

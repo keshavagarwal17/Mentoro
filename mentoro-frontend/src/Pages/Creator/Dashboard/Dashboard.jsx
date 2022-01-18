@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import Loader from '../../../Components/Loader/Loader';
+import { AxiosGet } from '../../../Components/Request/Request';
 
 const CreatorDashboard = ()=>{
     const behost = process.env.REACT_APP_BEHOST;
@@ -12,12 +13,25 @@ const CreatorDashboard = ()=>{
     const [loading,setLoading] = useState(true);
     useEffect(()=>{
         const getSessions = async()=>{
-            const res = await axios.get(behost+"session/get/" + userId)
-            setSession(res.data.session);
-            setLoading(false);
+            AxiosGet(behost + "session/get-all",(res)=>{
+                setSession(res.data);
+                setLoading(false);
+            })
         }
         getSessions();
-    })
+    },[])
+
+    const updateSession = (newSession)=>{
+        const temSession = session.map((doc,index)=>{
+            if(doc._id===newSession._id){
+                return newSession;
+            }else{
+                return doc;
+            }
+        })
+        setSession(temSession);
+    }
+
     return (
         <div className='creator-dashboard'>
             <div className='creator-dashboard-decoration-container'>
@@ -33,8 +47,8 @@ const CreatorDashboard = ()=>{
             {
                 loading?<Loader />:
                 (
-                    session.length===0?<p>You haven't create any session yet.</p> : 
-                    session.map((data,index)=><Card data={data} key={index}/>)
+                    session.length===0?<p>You haven't create any session yet. click on create-session from navbar to create session.</p> : 
+                    session.map((data,index)=><Card updateSession={updateSession} data={data} key={index}/>)
                 )
             }
         </div>

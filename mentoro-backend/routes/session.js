@@ -18,10 +18,24 @@ router.post("/create",ensureAuth,async(req,res)=>{
         res.send({success: true});
     } catch (error) {
         console.log(error);
-        res.send({error})
+        res.status(500).send({error})
     }
 })
 
+//put request to update session
+router.put("/update/:id",ensureAuth,async(req,res)=>{
+    try {
+        const mentorId = req.locals;
+        const sessionId = req.params.id;
+        await Session.findOneAndUpdate({_id:sessionId,mentor:mentorId},req.body)
+        res.send({success:true});
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({error})
+    }
+})
+
+//find one particular session detail
 router.get("/get-session/:id",async(req,res)=>{
     try {
         const sessionId = req.params.id;
@@ -33,16 +47,33 @@ router.get("/get-session/:id",async(req,res)=>{
     }
 })
 
-// all session from a particular user
+// all session of a particular mentor with user info
 router.get("/get/:id",async(req,res)=>{
     try {
         const userId = req.params.id;
-        User.findById(userId).populate("session").exec((err,user)=>{    
+        User.
+        findById(userId).
+        populate({
+            path:"session",
+            match:{public:{$eq:true}}
+        }).exec((err,user)=>{    
             res.send(user)
         })
     } catch (error) {
         console.log(error);
-        res.send({error})
+        res.status(500).send({error})
+    }
+})
+
+//all session for mentor dashboard
+router.get("/get-all",ensureAuth,async(req,res)=>{
+    try {
+        const userId = req.locals;
+        const session = await Session.find({mentor:userId})
+        res.send(session);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({error})
     }
 })
 

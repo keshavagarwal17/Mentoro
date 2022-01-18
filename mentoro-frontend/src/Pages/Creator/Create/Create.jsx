@@ -1,20 +1,34 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate,useSearchParams } from 'react-router-dom';
 import './Create.css';
-import { AxiosPost } from '../../../Components/Request/Request';
-import { Select } from 'antd';
+import { AxiosPost, AxiosPut } from '../../../Components/Request/Request';
+import { Select,message } from 'antd';
+import axios from 'axios';
+import Loader from '../../../Components/Loader/Loader';
 const {Option} = Select;
 
+
 const Create = () =>{
+    let [searchParams, setSearchParams] = useSearchParams();
+    let sessionId = searchParams.get("id");
     const behost = process.env.REACT_APP_BEHOST;
+    const [loading,setLoading] = useState(false);
     const [loadingBtn,setLoadingBtn] = useState(false);
     const navigate = useNavigate();
+    const [session,setSession] = useState({
+        title: "",
+        price: "",
+        duration:"",
+        description: ""
+    })
+
     const options = [];
     for(let i=15;i<=150;i+=15){
         options.push(
             <Option key={i} value={i}>{i} Minute</Option>
         )
     }
+
     const formElements = [
         {
             label:"Session Title",
@@ -41,12 +55,17 @@ const Create = () =>{
         },
     ]
 
-    const [session,setSession] = useState({
-        title: "",
-        price: "",
-        duration:"",
-        description: ""
-    })
+    useEffect(()=>{
+        const fetchSession = async()=>{
+            setLoading(true);
+            const res = await axios.get(behost + "session/get-session/" + sessionId);
+            setSession(res.data.session);
+            setLoading(false);
+        }
+        if(sessionId){
+            fetchSession();
+        }
+    },[])
 
     const handleChangeInput = (e)=>{
         setSession({
@@ -73,10 +92,28 @@ const Create = () =>{
     const createSession = async(e)=>{
         e.preventDefault();
         setLoadingBtn(true);
-        AxiosPost(behost+"session/create",session,(res)=>{
-            setLoadingBtn(false);
-            navigate("/creator/dashboard")
-        })
+        if(sessionId){
+            AxiosPut(behost + "session/update/" + sessionId,{
+                title: session.title,
+                price: session.price,
+                duration: session.duration,
+                description: session.description
+            },(res)=>{
+                setLoadingBtn(false);
+                message.success("Session Updated Successfully!!");
+                setTimeout(() => {
+                    navigate("/creator/dashboard")
+                }, 1000);
+            })
+        }else{
+            AxiosPost(behost+"session/create",session,(res)=>{
+                setLoadingBtn(false);
+                message.success("Session Created Successfully!!");
+                setTimeout(() => {
+                    navigate("/creator/dashboard")
+                }, 1000);
+            })
+        }
     }
 
     const handleChange = (e)=>{
@@ -87,26 +124,31 @@ const Create = () =>{
     }
 
     return (
-        <div className='create-session'>
-            <h3 className='heading'>Create A Session</h3>
-            <form onSubmit={createSession}>
-                <div className='create-session-flex'>
-                    <div className='create-session-inp-div'>
-                        {renderElement()}
-                        <div>
-                            <h4 className='label'>Duration</h4>
-                            <Select placeholder="Write the time duration for this session" style={{width:"90%",marginBottom:"10px"}} onChange={handleChange}>
-                                {options}
-                            </Select>
+        <>
+            {
+                loading?<Loader />:
+                <div className='create-session'>
+                    <h3 className='heading'>{sessionId?"Update Your":"Create A"} Session</h3>
+                    <form onSubmit={createSession}>
+                        <div className='create-session-flex'>
+                            <div className='create-session-inp-div'>
+                                {renderElement()}
+                                <div>
+                                    <h4 className='label'>Duration</h4>
+                                    <Select placeholder="Write the time duration for this session" value={session.duration} style={{width:"90%",marginBottom:"10px"}} onChange={handleChange}>
+                                        {options}
+                                    </Select>
+                                </div>
+                            </div>
+                            <div className='create-session-img-div'>
+                                <img src="/assets/create-session.svg" alt="" />
+                            </div>
                         </div>
-                    </div>
-                    <div className='create-session-img-div'>
-                        <img src="/assets/create-session.svg" alt="" />
-                    </div>
+                        <button type='submit'>{loadingBtn?"Loading...":((sessionId?"Update":"Create") + " Session")}</button>
+                    </form>
                 </div>
-                <button type='submit'>{loadingBtn?"Loading...":"Create Session"}</button>
-            </form>
-        </div>
+            }
+        </>
     );
 }
 

@@ -19,6 +19,14 @@ export const AxiosPut = async(url,data,callback)=>{
     callback(res);
 }
 
+export const AxiosDelete = async(url,callback)=>{
+    const res = await axios.delete(url,{
+        headers:{
+            Authorization:getUserId()
+        }
+    })
+    callback(res);
+}
 
 export const AxiosGet = async(url,callback)=>{
     const res = await axios.get(url,{
