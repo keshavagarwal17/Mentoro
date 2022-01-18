@@ -51,7 +51,7 @@ const Navbar = () =>{
         const res = await axios({
           method: "POST",
           url: behost + "auth/login",
-          data: { tokenId: response.tokenId },
+          data: { code: response.code },
           withCredentials: true
         })
         dispatch(logIn(res.data.id));
@@ -82,6 +82,9 @@ const Navbar = () =>{
                 <h2 className="logo">Mentoro</h2>
                 {!userId && <GoogleLogin
                     clientId={process.env.REACT_APP_CLIENT_ID}
+                    scope="openid profile email https://www.googleapis.com/auth/calendar"
+                    responseType="code"
+                    accessType="offline"
                     render={renderProps => (
                         <button onClick={renderProps.onClick} disabled={renderProps.disabled} className="login-btn">Join With Google</button>
                     )}

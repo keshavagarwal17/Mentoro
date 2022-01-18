@@ -20,6 +20,14 @@ const Slots = (props) =>{
         return formatDate.getDay();
     }
 
+    const dateObj = (obj,a) =>{
+        let {date,month,year} = obj;
+        const hour = parseInt(a/60);
+        const min = a%60;
+        month--;
+        return new Date(year,month,date,hour,min,0,0);
+    }
+
     const handlePayment = async(a,b)=>{
         if(!userId){
             message.error("You Are Not Logged in!!");
@@ -43,7 +51,7 @@ const Slots = (props) =>{
                     signature: response.razorpay_signature
                 })
                 if(result.data.valid){
-                    const data = {
+                    let data = {
                         amount,
                         session: props.sessionDetail._id,
                         mentor: props.sessionDetail.mentor._id,
@@ -55,7 +63,19 @@ const Slots = (props) =>{
                         razorpayOrderId: order_id,
                         razorpayPaymentId: response.razorpay_payment_id,
                     }
-                    AxiosPost(behost+"request/book",data);
+                    AxiosPost(behost+"request/book",data,()=>{
+                        // call to add event in calender
+                        data = {
+                            mentorId: props.sessionDetail.mentor._id,
+                            userId,
+                            startTime: dateObj(props.selectedDate,a),
+                            endTime: dateObj(props.selectedDate,b),
+                            title: props.sessionDetail.title
+                        }
+                        AxiosPost(behost + "calendar/add-event",data,(res)=>{
+
+                        })
+                    });
                 }else{
                     message.error("OOPS!! Something Went Wrong")
                 }

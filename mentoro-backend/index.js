@@ -8,6 +8,7 @@ const profileRoute = require("./routes/profile")
 const sessionRoute = require("./routes/session")
 const requestRoute = require("./routes/request")
 const paymentRoute = require("./routes/payment")
+const calendarRoute = require("./routes/calendar")
 
 dotenv.config("./.env");
 const port = process.env.PORT || 5000;
@@ -38,6 +39,7 @@ mongoose.connect(dbURI,{useNewUrlParser:true,useUnifiedTopology:true})
     app.use("/session",sessionRoute);
     app.use("/request",requestRoute);
     app.use("/payment",paymentRoute);
+    app.use("/calendar",calendarRoute);
 
     app.listen(port,()=>{
         console.log(`Server is Running on Port ${port}`);

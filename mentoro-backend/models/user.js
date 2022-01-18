@@ -11,6 +11,9 @@ const UserSchema = new Schema({
         unique: true,
         required:true
     },
+    refreshToken:{
+        type: String
+    },
     companyName:{
         type: String
     },
