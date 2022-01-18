@@ -1,0 +1,44 @@
+.create-session input,.create-session textarea{
+    box-shadow: 0px 0px 4px rgba(84, 84, 84, 0.25);
+    border-radius: 10px;
+    padding: 10px;
+    border: none;
+    outline: none;
+    margin-bottom: 10px;
+    width: 90%;
+}
+.create-session{
+    margin: 0 20px;
+}
+.create-session .label{
+    margin: 20px 0 10px 0;
+}
+.create-session-flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.create-session-inp-div{
+    flex: 2;
+}
+.create-session-img-div{
+    flex: 1;
+}
+.create-session-img-div img{
+    width: 350px;
+}
+.create-session .heading{
+    color: #FF6584;
+    font-size: 25px;
+}
+.create-session button{
+    box-shadow: 0px 1px 7px rgba(69, 69, 69, 0.3);
+    border-radius: 20px;
+    border: 1px solid #ACACAC;
+    padding: 5px 25px;
+    outline: none;
+    cursor: pointer;
+    background-color: #6C63FF;
+    color: white;
+    margin-bottom: 50px;
+}

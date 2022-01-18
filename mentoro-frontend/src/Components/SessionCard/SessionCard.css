@@ -1,0 +1,33 @@
+.creator-detail-session-card{
+    box-shadow: 0px 1px 3px rgba(69, 69, 69, 0.25);
+    padding: 7px 10px;
+    border-radius: 4px;
+    margin: 20px 0;
+}
+.creator-detail-session-card-header{
+    display: flex;
+    justify-content: space-between;
+}
+.creator-detail-session-card-header h5{
+    font-size: 17px;
+    font-weight: 600;
+}
+.creator-detail-session-card-price{
+    font-size: 16px;
+    font-weight: 600;
+    font-style: italic;
+}
+.creator-detail-session-card .book-now-btn button{
+    background-color: #6C63FF;
+    color: white;
+    box-shadow: 0px 1px 4px rgba(69, 69, 69, 0.25);
+    border-radius: 4px;
+    padding: 2px 5px;
+    border: 1px solid #ACACAC;
+    cursor: pointer;
+    right: 0;
+    font-size: 13px;
+}
+.creator-detail-session-card .book-now-btn{
+    text-align: right;
+}

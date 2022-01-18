@@ -1,0 +1,21 @@
+.mentor-page{
+    padding : 30px;
+}
+.mentor-profile-section{
+    display: flex;
+    align-items: center;
+}
+.mentor-profile-section img{
+    max-width: 300px;
+    border-radius: 10px;
+    box-shadow: 0px 1px 5px rgba(69, 69, 69, 0.25);
+    margin-right: 100px;
+}
+.mentor-page .session-heading{
+    font-size: 19px;
+    margin-top: 20px;
+    color: #32323283;
+}
+.expertise-section{
+    margin-top: 12px;
+}

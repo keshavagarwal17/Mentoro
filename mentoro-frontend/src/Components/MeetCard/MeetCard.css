@@ -1,0 +1,22 @@
+.meet-card{
+    border: .5px solid #acacacb7;
+    box-shadow: 0px 1px 3px rgba(69, 69, 69, 0.25);
+    margin: 20px 0;
+    padding: 10px 20px;
+    border-radius: 4px;
+}
+.meet-card-container{
+    display: flex;
+    justify-content: space-between;
+}
+.meet-card-container strong{
+    display: block;
+    margin-bottom: 5px;
+}
+.cancelled{
+    color: red;
+    font-weight: 600;
+}
+.meet-card p{
+    margin-bottom: 0;
+}

@@ -1,0 +1,9 @@
+.loader-gif{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.loader-gif img{
+    width: 50%;
+    height: 400px;
+}

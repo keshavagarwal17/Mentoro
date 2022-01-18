@@ -1,0 +1,30 @@
+.creator-dashboard{
+    margin: 40px 40px 0 30px;
+}
+.creator-dashboard-decoration-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.creator-dashboard-decoration-container img{
+    width: 300px;
+}
+.creator-dashboard-decoration-container h4{
+    font-size: 50px;
+    color: #FF6584;
+}
+.creator-dashboard-decoration-container p{
+    color: #32323271;
+    font-size: 20px;
+}
+.creator-dashboard .taglines{
+    flex: 1;
+}
+.creator-dashboard .img-block{
+    text-align: right;
+    flex: 1;
+}
+.your-session{
+    color: #6C63FF;
+    font-size: 20px;
+}

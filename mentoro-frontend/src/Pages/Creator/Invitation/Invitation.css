@@ -1,0 +1,23 @@
+.all-invitations{
+    margin: 20px;
+}
+.all-invitations .toggle-invite-link,.all-invitations .toggle-invite-link-active{
+    cursor: pointer;
+    margin-right: 20px;
+}
+.all-invitations .toggle-invite-link:hover,.all-invitations .toggle-invite-link-active:hover{
+    color: rgb(99, 185, 99);
+}
+.all-invitations .toggle-invite-link-active{
+    color: #FF6584;
+}
+.empty-div{
+    text-align: center;
+    padding: 0;
+}
+.empty-div svg{
+    max-width: 250px;
+    margin: 0;
+    max-height: 300px;
+    /* display: block; */
+}

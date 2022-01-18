@@ -1,0 +1,17 @@
+.creator-cards{
+    box-shadow: 0px 1px 3px rgba(69, 69, 69, 0.25);
+    border-radius: 4px;
+}
+
+.creator-cards .creator-info{
+    padding: 10px 0;
+    text-align: center;
+}
+
+.creator-cards img{
+    height: 270px;
+    max-width: 280px;
+}
+.creator-cards h5:hover,.creator-cards h3:hover{
+    color: #FF6584;
+}

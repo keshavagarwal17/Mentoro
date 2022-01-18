@@ -1,0 +1,13 @@
+.creator-session-card{
+    box-shadow: 0px 1px 3px rgba(69, 69, 69, 0.25);
+    padding: 15px 10px;
+    border-radius: 4px;
+    margin: 20px 0;
+}
+.creator-session-card-header{
+    display: flex;
+    justify-content: space-between;
+}
+.creator-session-card-header h5{
+    font-size: 18px;
+}

@@ -1,0 +1,7 @@
+.all-creator-card{
+    display:grid;
+    grid-gap: 0.5rem;
+    justify-items: center;
+    grid-row-gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}

@@ -1,0 +1,12 @@
+.pick-slot{
+    display: flex;
+    justify-content: space-between;
+    margin: 50px 30px;
+}
+.pick-slot img{
+    margin-top: 30px;
+    width: 250px;
+}
+.pick-slot-img-container{
+    text-align: center;
+}
