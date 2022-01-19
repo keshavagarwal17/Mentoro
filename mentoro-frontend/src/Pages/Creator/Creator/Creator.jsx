@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import{ Navigate} from "react-router-dom"
+import Loader from '../../../Components/Loader/Loader'
 
 const Creator = ()=>{
     const userId = useSelector((state) => state.auth.userId)
@@ -18,7 +19,7 @@ const Creator = ()=>{
     })
     return (
         <>
-            {loading?<p>Loading....</p>:
+            {loading?<Loader />:
             profile.about?<Navigate to="dashboard" replace />:<Navigate to="profile" replace state={profile}/>}
         </>
     );

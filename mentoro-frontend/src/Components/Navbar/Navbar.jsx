@@ -1,5 +1,5 @@
 import "./Navbar.css";
-import { SearchOutlined,HomeOutlined,UserOutlined,LogoutOutlined,WalletOutlined,PlusSquareOutlined,CalendarOutlined } from '@ant-design/icons';
+import { HomeOutlined,UserOutlined,LogoutOutlined,WalletOutlined,PlusSquareOutlined,CalendarOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux'
 import axios from "axios";
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
@@ -12,16 +12,19 @@ const Navbar = () =>{
     const behost = process.env.REACT_APP_BEHOST;
     const {pathname} = useLocation();
     const isCreator = (pathname.length>=8 && pathname.substr(0,8)==="/creator");
+    const [loading,setLoading] = useState(false);
     const userId = useSelector((state) => state.auth.userId)
     const dispatch = useDispatch();
     const [user,setUser] = useState({});
 
     useEffect(()=>{
         const fetchUser = async()=>{
+            setLoading(true);
             const response = await axios.get(behost + "profile/get/" + userId);
+            setLoading(false);
             setUser(response.data);
         }
-        if(isCreator){
+        if(isCreator && userId){
             fetchUser();
         }
     },[userId])
@@ -64,6 +67,7 @@ const Navbar = () =>{
     return (
         <>
             {   
+                loading?<></>:
                 isCreator?
                 <div className="navbar">
                     <h2 className="logo">Mentoro</h2>
