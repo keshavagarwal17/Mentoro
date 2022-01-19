@@ -47,14 +47,15 @@ router.post("/add-event",async(req,res)=>{
         console.log('There was an error contacting the Calendar service: ' + err);
         return;
       }
-      console.log('Event created: %s', event.htmlLink);
+      console.log('Event created: ', event);
+      res.send({eventId: event.data.id,eventLink: event.data.htmlLink})
     });
-    res.send({success:true})
     
   } catch (error) {
       console.log(error);
       res.status(500).send(error);
   }
 })
+
 
 module.exports = router;

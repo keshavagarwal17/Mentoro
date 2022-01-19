@@ -3,6 +3,8 @@ const router = express.Router();
 const User = require('../models/user')
 const Request = require("../models/request")
 const {ensureAuth} = require('../middleware/auth')
+const {google} = require("googleapis");
+
 
 //get total session of a cur mentor
 router.get("/mentor/get-all",ensureAuth,async(req,res)=>{
@@ -73,12 +75,31 @@ router.get("/find/:id",async(req,res)=>{
 })
 
 //cancel a event
+const oauth2client = new google.auth.OAuth2(
+    process.env.client_id,
+    process.env.client_secret,
+    process.env.fehost
+)
+
 router.put("/cancel/:id",ensureAuth,async(req,res)=>{
     try {
         const requestId = req.params.id;
         const mentorId = req.locals;
+        const calendar = google.calendar("v3");
+        //cancel event from db
         const event = await Request.findOneAndUpdate({_id:requestId,mentor:mentorId},{isCancel:true});
-        await User.findOneAndUpdate({_id:mentorId},{$inc:{totalEarning:-event.amount}})
+
+        //update mentor total earning
+        const user = await User.findOneAndUpdate({_id:mentorId},{$inc:{totalEarning:-event.amount}})
+
+        //cancel event from google calender
+        oauth2client.setCredentials({refresh_token:user.refreshToken})
+
+        await calendar.events.delete({
+            auth: oauth2client,
+            calendarId: 'primary',
+            eventId: event.eventId
+        });
         res.send({success:true})
     } catch (error) {
         console.log(error);

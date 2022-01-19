@@ -33,6 +33,9 @@ const SessionRequestSchema = new Schema({
     isCancel:{
         type: Boolean,
         default: false
+    },
+    eventId:{
+        type: String
     }
 },{timestamps: true})
 

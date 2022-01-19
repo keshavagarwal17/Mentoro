@@ -52,30 +52,34 @@ const Slots = (props) =>{
                 })
                 if(result.data.valid){
                     let data = {
-                        amount,
-                        session: props.sessionDetail._id,
-                        mentor: props.sessionDetail.mentor._id,
-                        sessionSchedule: {
-                            ...props.selectedDate,
-                            startTime: a,
-                            endTime: b
-                        },
-                        razorpayOrderId: order_id,
-                        razorpayPaymentId: response.razorpay_payment_id,
+                        mentorId: props.sessionDetail.mentor._id,
+                        userId,
+                        startTime: dateObj(props.selectedDate,a),
+                        endTime: dateObj(props.selectedDate,b),
+                        title: props.sessionDetail.title
                     }
-                    AxiosPost(behost+"request/book",data,()=>{
-                        // call to add event in calender
+                    //add event on calender
+                    AxiosPost(behost + "calendar/add-event",data,(res)=>{
                         data = {
-                            mentorId: props.sessionDetail.mentor._id,
-                            userId,
-                            startTime: dateObj(props.selectedDate,a),
-                            endTime: dateObj(props.selectedDate,b),
-                            title: props.sessionDetail.title
+                            amount,
+                            session: props.sessionDetail._id,
+                            mentor: props.sessionDetail.mentor._id,
+                            sessionSchedule: {
+                                ...props.selectedDate,
+                                startTime: a,
+                                endTime: b
+                            },
+                            razorpayOrderId: order_id,
+                            razorpayPaymentId: response.razorpay_payment_id,
+                            evnetId: res.data.evnetId
                         }
-                        AxiosPost(behost + "calendar/add-event",data,(res)=>{
+                        
+                        // book slot in db
+                        AxiosPost(behost+"request/book",data,()=>{
+                            
+                        });
+                    })
 
-                        })
-                    });
                 }else{
                     message.error("OOPS!! Something Went Wrong")
                 }
