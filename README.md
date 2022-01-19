@@ -6,7 +6,8 @@ You can use these credentials while making payment.
 - Upi = abc@upi 
 
 # Note
-As i haven't verified my app on google (because it will take several days to verify) it will show you below screen while you login with google first time. so make sure you click on advance button and provide google calendar access.
+As i haven't verified my app on google (because it will take several days to verify) it will show you below screen while you login with google first time. so make sure you click on continue button and provide google calendar access.
+<img width="358" alt="image" src="https://user-images.githubusercontent.com/56120769/150144868-f667df2e-62fe-40a1-83be-4846846db673.png">
 
 # Tech Stack Used
 Frontend:
