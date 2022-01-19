@@ -1,19 +1,34 @@
 import './Slots.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { message,Spin } from 'antd';
+import { message,Spin,Modal } from 'antd';
 import { AxiosPost,AxiosGet } from '../Request/Request';
 import { dayName, FormatFromMinute } from '../../Shared/algo';
 import { LoadingOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
-
+import { useNavigate } from 'react-router-dom';
 
 const Slots = (props) =>{
     const [slots,setSlots] = useState([]);
+    const navigate = useNavigate();
     const userId = useSelector((state) => state.auth.userId)
     const [loading,setLoading] = useState(true);
     const {date,month,year} = props.selectedDate;
     const behost = process.env.REACT_APP_BEHOST;
+    
+    const showConfirmationModal = (a)=>{
+        Modal.success({
+            title: 'Your Meeting is Scheduled Successfully!!',
+            content: (
+              <div>
+                your meeting is scheduled at {FormatFromMinute(a)} on {date}-{month}-{year}.
+                we have also added this event on your google calendar.
+              </div>
+            ),
+            onOk() {navigate("/your-meet")},
+            okText: "View Upcoming Meeting"
+          });
+    }
 
     const getDay = (date) =>{
         const formatDate =  new Date(year, month-1, date);
@@ -45,6 +60,7 @@ const Slots = (props) =>{
             "description": "Transaction",
             "order_id": order_id,
             "handler": async (response) => {
+                const hide = message.loading('Action in progress..', 0);
                 const result = await axios.post(behost + "payment/validate",{
                     razorpayOrderId: order_id,
                     razorpayPaymentId: response.razorpay_payment_id,
@@ -76,7 +92,8 @@ const Slots = (props) =>{
                         
                         // book slot in db
                         AxiosPost(behost+"request/book",data,()=>{
-                            
+                            hide();
+                            showConfirmationModal(a);
                         });
                     })
 

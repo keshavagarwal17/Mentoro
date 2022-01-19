@@ -48,7 +48,7 @@ router.post("/add-event",async(req,res)=>{
         return;
       }
       console.log('Event created: ', event);
-      res.send({eventId: event.data.id,eventLink: event.data.htmlLink})
+      res.send({eventId: event.data.id})
     });
     
   } catch (error) {
