@@ -1,0 +1,21 @@
+{
+  "name": "mentoro",
+  "version": "1.0.0",
+  "description": "Mentoro is a web application where a user can create sessions(by providing session details such as amount,duration,title and session description).creator can choose his/her availability. After that other people can book the session by picking up appropriate slots and paying session fee.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-prebuild": "cd mentoro-backend && npm install",
+    "start": "cd mentoro-backend && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keshavagarwal17/Mentoro.git"
+  },
+  "author": "Keshav Agarwal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/keshavagarwal17/Mentoro/issues"
+  },
+  "homepage": "https://github.com/keshavagarwal17/Mentoro#readme"
+}
