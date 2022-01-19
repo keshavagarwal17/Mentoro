@@ -11,6 +11,7 @@
 .creator-cards img{
     height: 270px;
     max-width: 280px;
+    min-width: 230px;
 }
 .creator-cards h5:hover,.creator-cards h3:hover{
     color: #FF6584;

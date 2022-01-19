@@ -87,7 +87,7 @@ const Slots = (props) =>{
                             },
                             razorpayOrderId: order_id,
                             razorpayPaymentId: response.razorpay_payment_id,
-                            evnetId: res.data.evnetId
+                            eventId: res.data.eventId
                         }
                         
                         // book slot in db

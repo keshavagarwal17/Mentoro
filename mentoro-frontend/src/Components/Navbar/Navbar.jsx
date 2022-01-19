@@ -72,7 +72,7 @@ const Navbar = () =>{
                         <Link to="/creator/create"> <PlusSquareOutlined /> Create-Session</Link>
                         <Link to="/creator/availability"> <CalendarOutlined /> Availability</Link>
                         <Link to="/creator/wallet"><WalletOutlined /> Wallet</Link>
-                        <Popover placement="bottomRight" title={user && user.name} content={content}>
+                        <Popover placement="bottomRight" title={user.name} content={content}>
                             <img style={{cursor:"pointer"}} className="nav-profile-img" src={user.imageUrl} alt="" />
                         </Popover>
                     </div>

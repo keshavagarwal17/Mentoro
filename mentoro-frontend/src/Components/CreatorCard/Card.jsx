@@ -1,5 +1,4 @@
 import "./Card.css";
-import {StarFilled} from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
 const Card = (props)=>{
@@ -12,7 +11,6 @@ const Card = (props)=>{
                 <h3>{user.name}</h3>
                 <h5>{user.role}</h5>
                 <h5>{user.companyName}</h5>
-                <h5>Rating: {user.rating} <StarFilled /> (Reviews {user.reviewCount})</h5>
                 <h5>{user.expertise }</h5>
             </div>
             </Link>
