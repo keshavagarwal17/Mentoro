@@ -1,5 +1,5 @@
 import './Home.css'
-import { ReactComponent as ShareSVG } from "./dashboard.svg";
+import { ReactComponent as DashboardSVG } from "./dashboard.svg";
 import { Link } from 'react-router-dom';
 
 const Home = ()=>{
@@ -10,7 +10,7 @@ const Home = ()=>{
                 <h5>Take Tips From the Industry Expert To Boost Your Career.</h5>
                 <button><Link to="/dashboard">Explore Now</Link></button>
             </div>
-            <ShareSVG />
+            <DashboardSVG />
         </div>
     );
 }

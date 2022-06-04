@@ -1,4 +1,5 @@
 .all-creator-card{
+    margin-top: 30px;
     display:grid;
     grid-gap: 0.5rem;
     justify-items: center;

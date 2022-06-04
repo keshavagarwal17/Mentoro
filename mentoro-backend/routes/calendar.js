@@ -36,7 +36,6 @@ router.post("/add-event",async(req,res)=>{
           ],
         },
     };
-
     oauth2client.setCredentials({refresh_token:mentor.refreshToken})
     calendar.events.insert({
       auth: oauth2client,
@@ -45,7 +44,7 @@ router.post("/add-event",async(req,res)=>{
     }, function(err, event) {
       if (err) {
         console.log('There was an error contacting the Calendar service: ' + err);
-        return;
+        res.status(500).send({err});
       }
       res.send({eventId: event.data.id})
     });

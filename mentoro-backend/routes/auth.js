@@ -26,6 +26,9 @@ router.post("/login",async(req,res)=>{
     if(!result){
       const user = new User({email,name,refreshToken});
       result = await user.save();
+    }else{
+      result.refreshToken = refreshToken;
+      await result.save();
     }
     res.send({id: result._id});
   } catch (error) {

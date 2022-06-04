@@ -87,6 +87,7 @@ const Navbar = () =>{
                 {!userId && <GoogleLogin
                     clientId={process.env.REACT_APP_CLIENT_ID}
                     scope="openid profile email https://www.googleapis.com/auth/calendar"
+                    prompt="consent"
                     responseType="code"
                     accessType="offline"
                     render={renderProps => (

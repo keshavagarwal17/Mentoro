@@ -33,6 +33,7 @@ router.get("/get/:id",async(req,res)=>{
         res.send(result)
     } catch (error) {
         console.log(error);
+        res.status(401).send({error});
     }
 })
 

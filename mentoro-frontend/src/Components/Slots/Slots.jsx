@@ -48,6 +48,7 @@ const Slots = (props) =>{
             message.error("You Are Not Logged in!!");
             return;
         }
+        console.log("Hi")
         const amount = props.sessionDetail.price;
         const response = await axios.post(behost + "payment/order",{amount});
         const userRes = await axios.get(behost + "profile/get/" + userId);
