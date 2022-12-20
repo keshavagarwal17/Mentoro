@@ -16,7 +16,7 @@ const Dashboard = ()=>{
             setLoading(false);
         }
         getAllCreators();
-    })
+    },[])
 
     return (
         <div>
